@@ -24,14 +24,8 @@ module.exports = function(grunt) {
         }
       }
     },
-    browserify: {
-      dist: {
-        src: ['./src/boundsawarelayergroup.js'],
-        dest: 'dist/boundsawarelayergroup.js'
-      }
-    },
     jasmine: {
-      src: 'dist/**/*.js',
+      src: 'src/**/*.js',
       options: {
         specs: 'spec/**/*.js',
         vendor: 'node_modules/leaflet/dist/leaflet-src.js'
@@ -49,11 +43,10 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
-  grunt.registerTask('test', ['jshint:all', 'browserify:dist', 'jasmine']);
+  grunt.registerTask('test', ['jshint:all', 'jasmine']);
 
   grunt.registerTask('default', ['test', 'uglify']);
 };
