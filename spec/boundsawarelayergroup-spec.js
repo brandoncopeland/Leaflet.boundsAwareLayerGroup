@@ -108,3 +108,44 @@ describe('LayerGroup when added to a map', function () {
     expect(map.hasLayer(marker)).toBe(false);
   });
 });
+
+describe('When navigating the map', function () {
+  beforeEach(function () {
+    mapDiv = document.createElement('div');
+    mapDiv.setAttribute('style', 'height: 500px; width: 500px;');
+    document.body.appendChild(mapDiv);
+    map = L.map(mapDiv).fitBounds([
+      [40, -30],
+      [41, -29]
+    ]);
+  });
+  afterEach(function () {
+    // mapDiv.remove(); // doesn't seem necessary with phantomjs?
+  });
+  it('should add child layers to the map that are in the new extent but were not in the previous', function () {
+    var layerGroup = L.layerGroup([], {
+      makeBoundsAware: true
+    }).addTo(map);
+    var marker = L.marker([60.5, -29.5]);
+    layerGroup.addLayer(marker);
+    expect(map.hasLayer(marker)).toBe(false);
+    map.fitBounds([
+      [60, -30],
+      [61, -29]
+    ]);
+    expect(map.hasLayer(marker)).toBe(true);
+  });
+  it('should remove child layers from the map that are not in the new extent but were in the previous', function () {
+    var layerGroup = L.layerGroup([], {
+      makeBoundsAware: true
+    }).addTo(map);
+    var marker = L.marker([40.5, -29.5]);
+    layerGroup.addLayer(marker);
+    expect(map.hasLayer(marker)).toBe(true);
+    map.fitBounds([
+      [60, -30],
+      [61, -29]
+    ]);
+    expect(map.hasLayer(marker)).toBe(false);
+  });
+});
