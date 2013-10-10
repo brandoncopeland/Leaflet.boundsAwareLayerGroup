@@ -1,0 +1,17 @@
+{
+  "name": "leaflet-boundsawarelayergroup",
+  "version": "0.0.0",
+  "description": "Efficient rendering for a faster Leaflet.LayerGroup",
+  "main": "dist/leaflet.boundsawarelayergroup.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "author": "",
+  "license": "BSD",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jasmine": "~0.5.2",
+    "grunt-browserify": "~1.2.8",
+    "leaflet": "~0.6.4"
+  }
+}
