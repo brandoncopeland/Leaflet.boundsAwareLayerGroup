@@ -1,6 +1,29 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    jshint: {
+      all: ['src/**/*.js'],
+      options: {
+        camelcase: true,
+        curly: true,
+        eqeqeq: true,
+        eqnull: true,
+        immed: true,
+        indent: 2,
+        latedef: true,
+        newcap: true,
+        noempty: true,
+        nonew: true,
+        // plusplus: true,
+        quotmark: true,
+        undef: true,
+        unused: true,
+        trailing: true,
+        globals: {
+          L: true
+        }
+      }
+    },
     browserify: {
       dist: {
         src: ['./src/boundsawarelayergroup.js'],
@@ -16,10 +39,11 @@ module.exports = function(grunt) {
     }
   });
 
+  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
 
-  grunt.registerTask('test', ['browserify:dist', 'jasmine']);
+  grunt.registerTask('test', ['jshint:all', 'browserify:dist', 'jasmine']);
 
   grunt.registerTask('default', ['test']);
 };
