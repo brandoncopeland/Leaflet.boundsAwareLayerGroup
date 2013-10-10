@@ -36,14 +36,24 @@ module.exports = function(grunt) {
         specs: 'spec/**/*.js',
         vendor: 'node_modules/leaflet/dist/leaflet-src.js'
       }
+    },
+    uglify: {
+      options: {
+        banner: '/*! <%= pkg.name %> <%= pkg.version %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+      },
+      dist: {
+        src: 'dist/boundsawarelayergroup.js',
+        dest: 'dist/boundsawarelayergroup.min.js'
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
 
   grunt.registerTask('test', ['jshint:all', 'browserify:dist', 'jasmine']);
 
-  grunt.registerTask('default', ['test']);
+  grunt.registerTask('default', ['test', 'uglify']);
 };
