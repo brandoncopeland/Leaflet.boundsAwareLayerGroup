@@ -149,3 +149,52 @@ describe('When navigating the map', function () {
     expect(map.hasLayer(marker)).toBe(false);
   });
 });
+
+// These also apply to Polygons or any path type with .getBounds func
+describe('Polylines', function () {
+  beforeEach(function () {
+    mapDiv = document.createElement('div');
+    mapDiv.setAttribute('style', 'height: 500px; width: 500px;');
+    document.body.appendChild(mapDiv);
+    map = L.map(mapDiv).fitBounds([
+      [40, -30],
+      [41, -29]
+    ]);
+  });
+  afterEach(function () {
+    // mapDiv.remove(); // doesn't seem necessary with phantomjs?
+  });
+  it('should be added if they are fully within the map bounds', function () {
+    var layerGroup = L.layerGroup([], {
+      makeBoundsAware: true
+    }).addTo(map);
+    var polyline = L.polyline([
+      [40.5, -29.5],
+      [40.7, -29.7]
+    ]);
+    layerGroup.addLayer(polyline);
+    expect(map.hasLayer(polyline)).toBe(true);
+  });
+  it('should be added if they intersect the map bounds', function () {
+    var layerGroup = L.layerGroup([], {
+      makeBoundsAware: true
+    }).addTo(map);
+    var polyline = L.polyline([
+      [40.5, -29.5],
+      [43.5, -32.5]
+    ]);
+    layerGroup.addLayer(polyline);
+    expect(map.hasLayer(polyline)).toBe(true);
+  });
+  it('should not be added if they do not intersect the map bounds in any way', function () {
+    var layerGroup = L.layerGroup([], {
+      makeBoundsAware: true
+    }).addTo(map);
+    var polyline = L.polyline([
+      [42.5, -31.5],
+      [43.5, -32.5]
+    ]);
+    layerGroup.addLayer(polyline);
+    expect(map.hasLayer(polyline)).toBe(false);
+  });
+});
