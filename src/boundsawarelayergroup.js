@@ -2,20 +2,15 @@ var defaultOptions = {
   makeBoundsAware: false
 };
 
+var originalInit = L.LayerGroup.prototype.initialize;
+
 L.LayerGroup.include({
   options: defaultOptions,
 
   initialize: function (layers, options) {
     L.setOptions(this, options);
 
-    // L.LayerGroup base initialize implementation
-    this._layers = {};
-    var i, len;
-    if (layers) {
-      for (i = 0, len = layers.length; i < len; i++) {
-        this.addLayer(layers[i]);
-      }
-    }
+    originalInit.call(this, layers);
   },
 
   addLayer: function (layer) {
