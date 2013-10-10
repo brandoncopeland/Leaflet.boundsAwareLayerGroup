@@ -31,6 +31,15 @@ module.exports = function(grunt) {
         vendor: 'node_modules/leaflet/dist/leaflet-src.js'
       }
     },
+    wrap: {
+      dist: {
+        src: ['src/boundsawarelayergroup.js'],
+        dest: 'dist/boundsawarelayergroup.js',
+        options: {
+          wrapper: ['(function (L) {\n', '\n}(L));']
+        }
+      }
+    },
     uglify: {
       options: {
         banner: '/*! <%= pkg.name %> <%= pkg.version %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
@@ -44,9 +53,10 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
+  grunt.loadNpmTasks('grunt-wrap');
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
   grunt.registerTask('test', ['jshint:all', 'jasmine']);
 
-  grunt.registerTask('default', ['test', 'uglify']);
+  grunt.registerTask('default', ['test', 'wrap:dist', 'uglify:dist']);
 };
