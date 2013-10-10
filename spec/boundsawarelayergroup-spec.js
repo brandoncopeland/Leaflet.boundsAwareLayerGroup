@@ -61,3 +61,50 @@ describe('LayerGroup.addLayer', function () {
     expect(map.hasLayer(marker)).toBe(false);
   });
 });
+
+describe('LayerGroup when added to a map', function () {
+  beforeEach(function () {
+    mapDiv = document.createElement('div');
+    mapDiv.setAttribute('style', 'height: 500px; width: 500px;');
+    document.body.appendChild(mapDiv);
+    map = L.map(mapDiv).fitBounds([
+      [40, -30],
+      [41, -29]
+    ]);
+  });
+  afterEach(function () {
+    // mapDiv.remove(); // doesn't seem necessary with phantomjs?
+  });
+  it('should also add child layers to the map if they are within the map bounds and options.makeBoundsAware === false', function () {
+    var layerGroup = L.layerGroup();
+    var marker = L.marker([40.5, -29.5]);
+    layerGroup.addLayer(marker);
+    layerGroup.addTo(map);
+    expect(map.hasLayer(marker)).toBe(true);
+  });
+  it('should also add child layers to the map if they are outside the map bounds and options.makeBoundsAware === false', function () {
+    var layerGroup = L.layerGroup();
+    var marker = L.marker([70, -50]);
+    layerGroup.addLayer(marker);
+    layerGroup.addTo(map);
+    expect(map.hasLayer(marker)).toBe(true);
+  });
+  it('should also add child layers to the map if they are within the map bounds and options.makeBoundsAware === true', function () {
+    var layerGroup = L.layerGroup([], {
+      makeBoundsAware: true
+    });
+    var marker = L.marker([40.5, -29.5]);
+    layerGroup.addLayer(marker);
+    layerGroup.addTo(map);
+    expect(map.hasLayer(marker)).toBe(true);
+  });
+  it('should not add child layers to the map if they are outside the map bounds and options.makeBoundsAware === true', function () {
+    var layerGroup = L.layerGroup([], {
+      makeBoundsAware: true
+    });
+    var marker = L.marker([70, -50]);
+    layerGroup.addLayer(marker);
+    layerGroup.addTo(map);
+    expect(map.hasLayer(marker)).toBe(false);
+  });
+});

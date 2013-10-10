@@ -33,6 +33,15 @@ L.LayerGroup.include({
     return this;
   },
 
+  onAdd: function (map) {
+    this._map = map;
+    if (this.options.makeBoundsAware === true) {
+      this._addForBounds(this._layers, map);
+    } else {
+      this.eachLayer(map.addLayer, map);
+    }
+  },
+
   _addForBounds: function (layerArray, map) {
     var mapBounds = map.getBounds(), intersectsMapBounds, layer, i;
 
