@@ -1,7 +1,7 @@
 var lines = [
   '/*',
   '<%= pkg.name %> - <%= pkg.version %>, <%= pkg.description %>',
-  'http://www.github.com/...',
+  '<%= pkg.repository.url %>',
   '(c) 2013 <%= pkg.author %>',
   '',
   '<%= pkg.name %> assumes Leaflet has already been included',

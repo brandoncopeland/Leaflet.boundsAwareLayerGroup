@@ -8,6 +8,10 @@
   },
   "author": "Brandon Copeland <br@ndoncopeland.com>",
   "license": "BSD",
+  "repository" : {
+    "type" : "git",
+    "url" : "git://github.com/brandoncopeland/Leaflet.boundsAwareLayerGroup.git"
+  },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-jasmine": "~0.5.2",

@@ -1,6 +1,6 @@
 /*
 leaflet-boundsawarelayergroup - 0.0.0, Efficient rendering for a faster Leaflet.LayerGroup
-http://www.github.com/...
+git://github.com/brandoncopeland/Leaflet.boundsAwareLayerGroup.git
 (c) 2013 Brandon Copeland <br@ndoncopeland.com>
 
 leaflet-boundsawarelayergroup assumes Leaflet has already been included
