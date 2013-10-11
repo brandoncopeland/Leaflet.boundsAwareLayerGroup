@@ -5,6 +5,8 @@ Leaflet.boundsAwareLayerGroup
 
 Adding many layers to a map can significantly decrease browser performance, even if the layers aren't currently visible because they're not within the map bounds. Leaflet.boundsAwareLayerGroup patches Leaflet.LayerGroup to manage adding layers within the map bounds and removing layers that are not on each bounds change (zoom, pan, etc...).
 
+Check out the [demo][] comparing performance with and without Leaflet.boundsAwareLayerGroup for 5,000 markers.
+
 ## Using the plugin
 
 Create a new [Leaflet.LayerGroup][] with the `makeBoundsAware` option.
@@ -33,3 +35,5 @@ L.featureGroup([marker1, marker2], {
 
 [leaflet.layergroup]: http://leafletjs.com/reference.html#layergroup
 [leaflet.featuregroup]: http://leafletjs.com/reference.html#featuregroup
+
+[example]: http://brandoncopeland.github.io/Leaflet.boundsAwareLayerGroup/example/
