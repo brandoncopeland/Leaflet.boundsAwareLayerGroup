@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Leaflet.boundsAwareLayerGroup Example</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+		<!--[if lte IE 8]>
+		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
+		<![endif]-->
+		<style>
+			html, body, #map {
+				height: 100%;
+				overflow: hidden;
+				margin: 0;
+			}
+			body {
+				font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+				font-weight: 300;
+			}
+			.title {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				padding: 10px;
+				text-align: center;
+				background: #000;
+				color: #fff;
+				opacity: 0.5;
+			}
+			p {
+				margin: 5px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="map"></div>
+		<div class="title">
+			<p>Comparison of Leaflet.LayerGroup with and without makeBoundsAware option</p>
+			<p>Grid of around 5,000 markers added to each LayerGroup</p>
+		</div>
+
+		<script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
+		<script src="../dist/leaflet.boundsawarelayergroup.min.js"></script>
+		<script>
+			var mapCenter = [29.76, -95.38];
+
+			// Set up map
+			var map = L.map('map', {
+				attributionControl: false
+			}).setView(mapCenter, 8);
+
+			var layerGroup = L.layerGroup();
+			var boundsAwareLayerGroup = L.layerGroup([], {
+				makeBoundsAware: true
+			});
+
+			boundsAwareLayerGroup.addTo(map);
+
+			L.control.layers({
+				'Bounds Aware Leaflet.LayerGroup': boundsAwareLayerGroup,
+				'Leaflet.LayerGroup': layerGroup
+			}, null, {
+				collapsed: false
+			}).addTo(map);
+
+			// Create grid of around 5000 markers and add to both layer groups
+			var row, col;
+			var markerCount = 5000;
+			var colRowCount = Math.floor(Math.sqrt(markerCount));
+			var startingMarkerX = mapCenter[1] - (colRowCount * 0.5);
+			var startingMarkerY = mapCenter[0] - (colRowCount * 0.5);
+			for (row = 0; row < colRowCount; row++) {
+				for (col = 0; col < colRowCount; col++) {
+					L.marker([col + startingMarkerY, row + startingMarkerX]).addTo(layerGroup);
+					L.marker([col + startingMarkerY, row + startingMarkerX]).addTo(boundsAwareLayerGroup);
+				}
+			}
+		</script>
+	</body>
+</html>
