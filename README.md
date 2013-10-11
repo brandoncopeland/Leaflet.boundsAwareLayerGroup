@@ -36,4 +36,4 @@ L.featureGroup([marker1, marker2], {
 [leaflet.layergroup]: http://leafletjs.com/reference.html#layergroup
 [leaflet.featuregroup]: http://leafletjs.com/reference.html#featuregroup
 
-[example]: http://brandoncopeland.github.io/Leaflet.boundsAwareLayerGroup/example/
+[demo]: http://brandoncopeland.github.io/Leaflet.boundsAwareLayerGroup/example/
