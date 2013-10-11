@@ -6,7 +6,7 @@
   "scripts": {
     "test": "grunt test"
   },
-  "author": "",
+  "author": "Brandon Copeland <br@ndoncopeland.com>",
   "license": "BSD",
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -15,5 +15,6 @@
     "grunt-wrap": "~0.3.0",
     "grunt-contrib-uglify": "~0.2.4",
     "leaflet": "~0.6.4"
-  }
+  },
+  "keywords": ["map", "leaflet"]
 }

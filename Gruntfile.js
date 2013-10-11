@@ -1,3 +1,5 @@
+var banner = require('./src/banner');
+
 module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -20,12 +22,13 @@ module.exports = function(grunt) {
         unused: true,
         trailing: true,
         globals: {
-          L: true
+          L: true,
+          module: true
         }
       }
     },
     jasmine: {
-      src: 'src/**/*.js',
+      src: 'src/boundsawarelayergroup.js',
       options: {
         specs: 'spec/**/*.js',
         vendor: 'node_modules/leaflet/dist/leaflet-src.js'
@@ -34,19 +37,20 @@ module.exports = function(grunt) {
     wrap: {
       dist: {
         src: ['src/boundsawarelayergroup.js'],
-        dest: 'dist/boundsawarelayergroup.js',
+        dest: 'dist/leaflet.boundsawarelayergroup.js',
         options: {
-          wrapper: ['(function (L) {\n', '\n}(L));']
+          wrapper: [banner + '\n\n(function (L) {\n', '\n}(L));']
         }
       }
     },
     uglify: {
       options: {
-        banner: '/*! <%= pkg.name %> <%= pkg.version %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+        report: 'gzip',
+        banner: banner + '\n'
       },
       dist: {
-        src: 'dist/boundsawarelayergroup.js',
-        dest: 'dist/boundsawarelayergroup.min.js'
+        src: 'dist/leaflet.boundsawarelayergroup.js',
+        dest: 'dist/leaflet.boundsawarelayergroup.min.js'
       }
     }
   });
