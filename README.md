@@ -32,3 +32,4 @@ L.featureGroup([marker1, marker2], {
 ```
 
 [leaflet.layergroup]: http://leafletjs.com/reference.html#layergroup
+[leaflet.featuregroup]: http://leafletjs.com/reference.html#featuregroup
