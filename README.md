@@ -23,5 +23,12 @@ L.layerGroup([marker1, marker2], {
 }).addTo(map);
 ```
 
+Leaflet.boundsAwareLayerGroup works with [Leaflet.FeatureGroup][] as well...
+
+```javascript
+L.featureGroup([marker1, marker2], {
+	makeBoundsAware: true
+}).addTo(map);
+```
 
 [leaflet.layergroup]: http://leafletjs.com/reference.html#layergroup

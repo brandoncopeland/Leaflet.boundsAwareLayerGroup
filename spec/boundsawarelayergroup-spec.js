@@ -11,6 +11,17 @@ describe('LayerGroup options', function () {
   });
 });
 
+describe('FeatureGroup options', function () {
+  it('should include `makeBoundsAware` as default false', function () {
+    var featureGroup = L.featureGroup();
+    expect(featureGroup.options.makeBoundsAware).toBe(false);
+  });
+  it('should include `makeBoundsAware` as true if passed as arg', function () {
+    var featureGroup = L.featureGroup([], { makeBoundsAware: true });
+    expect(featureGroup.options.makeBoundsAware).toBe(true);
+  });
+});
+
 describe('LayerGroup.initialize', function () {
   it('should still behave as the base L.LayerGroup implementation and add any passed layers', function () {
     var marker = L.marker([50.5, 30.5]);

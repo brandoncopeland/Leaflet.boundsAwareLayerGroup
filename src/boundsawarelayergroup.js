@@ -69,3 +69,7 @@ L.LayerGroup.include({
 L.layerGroup = function (layers, options) {
   return new L.LayerGroup(layers, options);
 };
+
+L.featureGroup = function (layers, options) {
+  return new L.FeatureGroup(layers, options);
+};
