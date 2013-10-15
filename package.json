@@ -1,6 +1,6 @@
 {
   "name": "leaflet-boundsawarelayergroup",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Leaflet.LayerGroup plugin to render only layers in the current map bounds",
   "main": "dist/leaflet.boundsawarelayergroup.js",
   "scripts": {

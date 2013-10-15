@@ -1,5 +1,5 @@
 /*
-leaflet-boundsawarelayergroup - 1.0.0, Leaflet.LayerGroup plugin to render only layers in the current map bounds
+leaflet-boundsawarelayergroup - 1.1.0, Leaflet.LayerGroup plugin to render only layers in the current map bounds
 git://github.com/brandoncopeland/Leaflet.boundsAwareLayerGroup.git
 (c) 2013 Brandon Copeland <br@ndoncopeland.com>
 
@@ -15,9 +15,8 @@ var defaultOptions = {
 var originalInit = L.LayerGroup.prototype.initialize;
 
 L.LayerGroup.include({
-  options: defaultOptions,
-
   initialize: function (layers, options) {
+    L.setOptions(this, defaultOptions);
     L.setOptions(this, options);
 
     originalInit.call(this, layers);

@@ -5,9 +5,8 @@ var defaultOptions = {
 var originalInit = L.LayerGroup.prototype.initialize;
 
 L.LayerGroup.include({
-  options: defaultOptions,
-
   initialize: function (layers, options) {
+    L.setOptions(this, defaultOptions);
     L.setOptions(this, options);
 
     originalInit.call(this, layers);
