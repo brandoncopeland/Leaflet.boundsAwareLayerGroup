@@ -13,6 +13,7 @@ var defaultOptions = {
 };
 
 var originalInit = L.LayerGroup.prototype.initialize;
+var originalOnRemove = L.LayerGroup.prototype.onRemove;
 
 L.LayerGroup.include({
   initialize: function (layers, options) {
@@ -41,12 +42,19 @@ L.LayerGroup.include({
     this._map = map;
     if (this.options.makeBoundsAware === true) {
       this._addForBounds(this._layers, map);
-      map.on('moveend', function () {
-        this._addForBounds(this._layers, map);
-      }, this);
+      map.on('moveend', this._onMapMoveEnd, this);
     } else {
       this.eachLayer(map.addLayer, map);
     }
+  },
+
+  onRemove: function (map) {
+    originalOnRemove.call(this, map);
+    map.off('moveend', this._onMapMoveEnd, this);
+  },
+
+  _onMapMoveEnd: function () {
+    this._addForBounds(this._layers, this._map);
   },
 
   _addForBounds: function (layerArray, map) {
