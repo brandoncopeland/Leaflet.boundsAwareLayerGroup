@@ -18,7 +18,7 @@ L.LayerGroup.include({
     this._layers[id] = layer;
 
     if (this._map) {
-      if (this.options.makeBoundsAware === true) {
+      if (this.options && this.options.makeBoundsAware === true) {
         this._addForBounds([layer], this._map);
       } else {
         this._map.addLayer(layer);
@@ -30,7 +30,7 @@ L.LayerGroup.include({
 
   onAdd: function (map) {
     this._map = map;
-    if (this.options.makeBoundsAware === true) {
+    if (this.options && this.options.makeBoundsAware === true) {
       this._addForBounds(this._layers, map);
       map.on('moveend', this._onMapMoveEnd, this);
     } else {
