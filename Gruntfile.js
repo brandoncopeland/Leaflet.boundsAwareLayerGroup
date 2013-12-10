@@ -13,7 +13,8 @@ module.exports = function(grunt) {
       src: 'src/boundsawarelayergroup.js',
       options: {
         specs: 'spec/**/*.js',
-        vendor: 'node_modules/leaflet/dist/leaflet-src.js'
+        vendor: 'node_modules/leaflet/dist/leaflet-src.js',
+        styles: 'node_modules/leaflet/dist/leaflet.css'
       }
     },
     wrap: {
