@@ -6,25 +6,7 @@ module.exports = function(grunt) {
     jshint: {
       all: ['src/**/*.js'],
       options: {
-        camelcase: true,
-        curly: true,
-        eqeqeq: true,
-        eqnull: true,
-        immed: true,
-        indent: 2,
-        latedef: true,
-        newcap: true,
-        noempty: true,
-        nonew: true,
-        // plusplus: true,
-        quotmark: true,
-        undef: true,
-        unused: true,
-        trailing: true,
-        globals: {
-          L: true,
-          module: true
-        }
+        jshintrc: '.jshintrc'
       }
     },
     jasmine: {
