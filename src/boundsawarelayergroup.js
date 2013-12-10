@@ -64,6 +64,13 @@ L.LayerGroup.include({
         }
       }
 
+      if (this.options.minZoom && map.getZoom() < this.options.minZoom) {
+        intersectsMapBounds = false;
+      }
+      if (this.options.maxZoom && map.getZoom() > this.options.maxZoom) {
+        intersectsMapBounds = false;
+      }
+
       if (intersectsMapBounds) {
         map.addLayer(layer);
       } else {
