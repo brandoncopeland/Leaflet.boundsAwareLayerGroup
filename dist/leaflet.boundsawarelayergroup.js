@@ -1,5 +1,5 @@
 /*
-leaflet-boundsawarelayergroup - 1.1.1, Leaflet.LayerGroup plugin to render only layers in the current map bounds
+leaflet-boundsawarelayergroup - 1.2.0, Leaflet.LayerGroup plugin to render only layers in the current map bounds
 git://github.com/brandoncopeland/Leaflet.boundsAwareLayerGroup.git
 (c) 2013 Brandon Copeland <br@ndoncopeland.com>
 
@@ -72,6 +72,13 @@ L.LayerGroup.include({
         if (!mapBounds.intersects(layer.getBounds())) {
           intersectsMapBounds = false;
         }
+      }
+
+      if (this.options.minZoom && map.getZoom() < this.options.minZoom) {
+        intersectsMapBounds = false;
+      }
+      if (this.options.maxZoom && map.getZoom() > this.options.maxZoom) {
+        intersectsMapBounds = false;
       }
 
       if (intersectsMapBounds) {
