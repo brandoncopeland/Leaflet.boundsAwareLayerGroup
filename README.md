@@ -33,6 +33,11 @@ L.featureGroup([marker1, marker2], {
 }).addTo(map);
 ```
 
+## Additional options
+
+- minZoom - Do not show LayerGroup if map zoom is less than minZoom
+- maxZoom - Do not show LayerGroup if map zoom is greater than maxZoom
+
 [leaflet.layergroup]: http://leafletjs.com/reference.html#layergroup
 [leaflet.featuregroup]: http://leafletjs.com/reference.html#featuregroup
 
