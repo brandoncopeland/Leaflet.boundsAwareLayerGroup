@@ -35,6 +35,13 @@ module.exports = function(grunt) {
         src: 'dist/leaflet.boundsawarelayergroup.js',
         dest: 'dist/leaflet.boundsawarelayergroup.min.js'
       }
+    },
+    release: {
+      options: {
+        tagName: '<%= version %>',
+        commitMessage: 'release <%= version %>',
+        tagMessage: 'tag <%= version %>', //default: 'Version <%= version %>'
+      }
     }
   });
 
@@ -42,6 +49,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-wrap');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-release');
 
   grunt.registerTask('test', ['jshint:all', 'jasmine']);
 
