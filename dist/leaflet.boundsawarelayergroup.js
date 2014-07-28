@@ -1,5 +1,5 @@
 /*
-leaflet-boundsawarelayergroup - 1.2.0, Leaflet.LayerGroup plugin to render only layers in the current map bounds
+leaflet-boundsawarelayergroup - 1.2.1, Leaflet.LayerGroup plugin to render only layers in the current map bounds
 git://github.com/brandoncopeland/Leaflet.boundsAwareLayerGroup.git
 (c) 2013 Brandon Copeland <br@ndoncopeland.com>
 
@@ -58,33 +58,35 @@ L.LayerGroup.include({
   },
 
   _addForBounds: function (layerArray, map) {
-    var mapBounds = map.getBounds(), intersectsMapBounds, layer, i;
+    var mapBounds = map.getBounds(), intersectsMapBounds, layer, property;
 
-    for (i in layerArray) {
-      layer = layerArray[i];
-      intersectsMapBounds = true; // assume should be rendered by default
+    for (property in layerArray) {
+      if (layerArray.hasOwnProperty(property)) {
+        layer = layerArray[property];
+        intersectsMapBounds = true; // assume should be rendered by default
 
-      if (typeof layer.getLatLng === 'function') {
-        if (!mapBounds.contains(layer.getLatLng())) {
+        if (typeof layer.getLatLng === 'function') {
+          if (!mapBounds.contains(layer.getLatLng())) {
+            intersectsMapBounds = false;
+          }
+        } else if (typeof layer.getBounds === 'function') {
+          if (!mapBounds.intersects(layer.getBounds())) {
+            intersectsMapBounds = false;
+          }
+        }
+
+        if (this.options.minZoom && map.getZoom() < this.options.minZoom) {
           intersectsMapBounds = false;
         }
-      } else if (typeof layer.getBounds === 'function') {
-        if (!mapBounds.intersects(layer.getBounds())) {
+        if (this.options.maxZoom && map.getZoom() > this.options.maxZoom) {
           intersectsMapBounds = false;
         }
-      }
 
-      if (this.options.minZoom && map.getZoom() < this.options.minZoom) {
-        intersectsMapBounds = false;
-      }
-      if (this.options.maxZoom && map.getZoom() > this.options.maxZoom) {
-        intersectsMapBounds = false;
-      }
-
-      if (intersectsMapBounds) {
-        map.addLayer(layer);
-      } else {
-        map.removeLayer(layer);
+        if (intersectsMapBounds) {
+          map.addLayer(layer);
+        } else {
+          map.removeLayer(layer);
+        }
       }
     }
   }
