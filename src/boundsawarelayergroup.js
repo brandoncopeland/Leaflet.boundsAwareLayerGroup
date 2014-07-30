@@ -19,7 +19,9 @@ L.LayerGroup.include({
 
     if (this._map) {
       if (this.options && this.options.makeBoundsAware === true) {
-        this._addForBounds([layer], this._map);
+        this._addForBounds({
+          0: layer
+        }, this._map);
       } else {
         this._map.addLayer(layer);
       }
@@ -47,11 +49,11 @@ L.LayerGroup.include({
     this._addForBounds(this._layers, this._map);
   },
 
-  _addForBounds: function (layerArray, map) {
-    var mapBounds = map.getBounds(), intersectsMapBounds, layer, i;
+  _addForBounds: function (layers, map) {
+    var mapBounds = map.getBounds(), intersectsMapBounds, layer, id;
 
-    for (i in layerArray) {
-      layer = layerArray[i];
+    for (id in layers) {
+      layer = layers[id];
       intersectsMapBounds = true; // assume should be rendered by default
 
       if (typeof layer.getLatLng === 'function') {
